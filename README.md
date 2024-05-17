@@ -1,1 +1,1 @@
-# Lab2_213170554_JordanAriasHurtado
+# Lab2_213170554_JordanArias
