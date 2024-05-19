@@ -106,7 +106,7 @@ station( 3, "ULA", "r", 45, ST3),
 section(ST1, ST2, 2, 50, S0),
 section( ST2, ST3, 2.5, 55, S1),
 
-line( 0, "Línea 0", "UIC 60 ASCE", [S0,S1], L0),
-
+line( 0, "Línea 0", "UIC 60 ASCE", [S1,S2], L0),
 lineLength(L0,LenghtLine,DistanceLine,CostLine).
+
 */
