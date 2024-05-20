@@ -1,3 +1,7 @@
+:-module(line_21317055_AriasHurtado,[stationType/1, station/5, isStation/1, section/5, isSection/1, isSections/1, line/5, isLine/1, lineLength/4, calcLenghtLine/2, auxCalcLenghtLine/3, calcDistanceLine/2, auxCalcDistanceLine/3,calcCostLine/2,auxCalcCostLine/3]).
+
+
+
 stationType(Type):-
     member(Type, ["r", "m", "c", "t"]).
 
