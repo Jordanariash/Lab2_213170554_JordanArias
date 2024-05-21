@@ -1,4 +1,4 @@
-:-module(train_21317055_AriasHurtado, [isPcars/1, validTrain/1, validTrainBody/2, train/6]).
+:-module(train_21317055_AriasHurtado, [isPcars/1, validTrain/1, validTrainBody/2, train/6, trainAddCar/4, trainRemoveCar/3, isTrain/1]).
 :- use_module(pcar_21317055_AriasHurtado, [isPcar/1]).
 
 
@@ -42,6 +42,31 @@ train(IdTrain, Maker, RailType, Speed, Pcars, Train):-
 
 
 
+
+trainAddCar([IdTrain, Maker, RailType, Speed,Pcars], Pcar, 0, [IdTrain, Maker, RailType, Speed,[Pcar|Pcars]]).
+trainAddCar([IdTrain, Maker, RailType, Speed,[H|T]], Pcar, Position, [IdTrain, Maker, RailType, Speed,[H|TAux]]):-
+    integer(Position),
+    Position > 0,
+    AuxPosition is Position - 1,
+    trainAddCar([IdTrain, Maker, RailType, Speed,T], Pcar, AuxPosition, [IdTrain, Maker, RailType, Speed,TAux]).
+
+
+
+
+trainRemoveCar([IdTrain, Maker, RailType, Speed,[_|T]], 0,[IdTrain, Maker, RailType, Speed,T]).
+trainRemoveCar([IdTrain, Maker, RailType, Speed,[H|T]], Position, [IdTrain, Maker, RailType, Speed,[H|TAux]]):-
+    integer(Position),
+    Position>0,
+    AuxPosition is Position - 1,
+    trainRemoveCar([IdTrain, Maker, RailType, Speed,T], AuxPosition, [IdTrain, Maker, RailType, Speed,TAux]).
+
+
+
+isTrain([IdTrain, Maker, RailType, Speed, Pcars]):-
+    train(IdTrain, Maker, RailType, Speed, Pcars,_).
+
+
+
 /*
 
 pcar( 0, 90, "NS-74", "ct", PC0),
@@ -49,10 +74,13 @@ pcar( 1, 100, "NS-74", "tr", PC1),
 pcar( 2, 150, "NS-74", "tr", PC2),
 pcar( 3, 90, "NS-74", "ct", PC3),
 
+train( 0, "CAF", "UIC 60 ASCE", 60, [ ], T0),
+train( 1, "CAF", "UIC 60 ASCE", 70, [PC1, PC0, PC3, PC2], T1),
 
-train( 1, "CAF", "UIC 60 ASCE", 70, [PC1, PC0, PC3, PC2], T1).
-train( 0, "CAF", "UIC 60 ASCE", 60, [ ], T0).
-
+trainAddCar( T0, PC1, 0, T2).
+trainAddCar( T2, PC0, 1, T3).
+trainAddCar( T3, PC2, 2, T4).
+trainAddCar( T4, PC3, 2, T5).
 
 pcar( 4, 100, "AS-2014", "ct", PC4),
 pcar( 5, 100, "AS-2014", "ct", PC5),
