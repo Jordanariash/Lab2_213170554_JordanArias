@@ -1,5 +1,5 @@
-:-module(train_21317055_AriasHurtado, [isPcars/1, validTrain/1, validTrainBody/2, train/6, trainAddCar/4, trainRemoveCar/3, isTrain/1]).
-:- use_module(pcar_21317055_AriasHurtado, [isPcar/1]).
+:-module(train_21317055_AriasHurtado, [isPcars/1, validTrain/1, validTrainBody/2, train/6, trainAddCar/4, trainRemoveCar/3, isTrain/1, trainCapacity/2, auxTrainCapacity/3]).
+:- use_module(pcar_21317055_AriasHurtado, [isPcar/1,pcarType/1, pcar/5]).
 
 
 %verifica que SOLO reciba pcars
@@ -64,6 +64,19 @@ trainRemoveCar([IdTrain, Maker, RailType, Speed,[H|T]], Position, [IdTrain, Make
 
 isTrain([IdTrain, Maker, RailType, Speed, Pcars]):-
     train(IdTrain, Maker, RailType, Speed, Pcars,_).
+
+
+auxTrainCapacity([], Acumulador, Acumulador).
+
+auxTrainCapacity([[_, Capacity, _, _]|T], Acumulador, TrainCapacity):-
+    AuxAcumulador is Acumulador + Capacity,
+    auxTrainCapacity(T, AuxAcumulador, TrainCapacity).
+
+trainCapacity( [_, _, _, _, Pcars], TrainCapacity):-
+    auxTrainCapacity(Pcars,0, TrainCapacity).
+
+
+
 
 
 
