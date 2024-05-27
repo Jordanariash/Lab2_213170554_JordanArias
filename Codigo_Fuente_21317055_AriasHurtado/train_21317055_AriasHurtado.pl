@@ -1,5 +1,5 @@
-:-module(train_21317055_AriasHurtado, [isPcars/1, validTrain/1, validTrainBody/2, train/6, trainAddCar/4, trainRemoveCar/3, isTrain/1, trainCapacity/2, auxTrainCapacity/3]).
-:- use_module(pcar_21317055_AriasHurtado, [isPcar/1,pcarType/1, pcar/5]).
+:-module(train_21317055_AriasHurtado, [isPcars/1, validTrain/1, validTrainBody/2, train/6, trainAddCar/4, trainRemoveCar/3, isTrain/1, trainCapacity/2, auxTrainCapacity/3,isTrains/1]).
+:- use_module(pcar_21317055_AriasHurtado).
 
 
 %verifica que SOLO reciba pcars
@@ -77,6 +77,11 @@ trainCapacity( [_, _, _, _, Pcars], TrainCapacity):-
 
 
 
+isTrains([]).
+isTrains([H|T]):-
+    isTrain(H),
+    isTrains(T).
+
 
 
 
@@ -88,7 +93,7 @@ pcar( 2, 150, "NS-74", "tr", PC2),
 pcar( 3, 90, "NS-74", "ct", PC3),
 
 train( 0, "CAF", "UIC 60 ASCE", 60, [ ], T0),
-train( 1, "CAF", "UIC 60 ASCE", 70, [PC1, PC0, PC3, PC2], T1),
+train( 1, "CAF", "UIC 60 ASCE", 70, [PC1, PC0, PC3, PC2], T1).
 
 trainAddCar( T0, PC1, 0, T2).
 trainAddCar( T2, PC0, 1, T3).

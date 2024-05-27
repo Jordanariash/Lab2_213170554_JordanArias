@@ -1,4 +1,4 @@
-:-module(driver_21317055_AriasHurtado,[driver/4, isDriver/1]).
+:-module(driver_21317055_AriasHurtado,[driver/4, isDriver/1, isDrivers/1]).
 
 
 
@@ -11,6 +11,13 @@ driver(IdDriver, NameDriver, TrainMaker, Driver):-
 
 isDriver([IdDriver, NameDriver, TrainMaker]):-
     driver(IdDriver, NameDriver, TrainMaker, _).
+
+
+isDrivers([]).
+isDrivers([H|T]):-
+    isDriver(H),
+    isDrivers(T).
+
 
 /*
 
