@@ -20,7 +20,7 @@
 
 
 
-%Predicados contructores
+% Predicados contructores
 
 
 % Dominio: Point1 (station) X Point2 (station) X Distance
@@ -42,7 +42,7 @@ section(Point1,Point2,Distance,Cost,Section):-
 
 
 
-%Predicados Pertenencia
+% Predicados Pertenencia
 
 % Dominio: Point1 (station) X Point2 (station) X Distance
 % (positive-number) X Xost (positive-number U {0})

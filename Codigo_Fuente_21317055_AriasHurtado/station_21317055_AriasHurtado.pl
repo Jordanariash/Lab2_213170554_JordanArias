@@ -21,7 +21,7 @@
 
 
 
-% -Predicados Constructores
+% Predicados Constructores
 
 
 % Dominio: IdStation (int) X NameStation (String) X type (stationType) X
@@ -40,9 +40,7 @@ station(IdStation,NameStation,Type,StopTime,Station):-
 
 
 
-% -Predicados Pertenencia
-
-
+% Predicados Pertenencia
 
 % Dominio: IdStation (int) X NameStation (String) X type (stationType) X
 % StopTime (positive integer)
@@ -55,7 +53,7 @@ isStation([IdStation, NameStation,Type, StopTime]):-
 
 
 
-%-Otros Predicados
+% Otros Predicados
 
 % Dominio: Type(String)
 %

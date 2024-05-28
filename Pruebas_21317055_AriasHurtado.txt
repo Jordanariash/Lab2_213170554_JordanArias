@@ -1,0 +1,127 @@
+%creacion de todas las estaciones
+station( 1, "Kings Cross St Pancras",    "t", 30,   ST1),
+station( 2, "Oxford Circus", "r", 32, ST2),
+station( 3, "Piccadilly Circus", "m", 30, ST3),
+station( 4, "Victoria", "r", 37, ST4),
+station( 5, "Waterloo", "t", 34, ST5),
+
+station( 6, "Sol", "t", 33, ST6),
+station( 7, "Atocha", "r", 40, ST7),
+station( 8, "Nuevos Ministerios", "t", 35, ST8),
+
+station( 9, "Shibuya", "r", 43, ST9),
+station( 10, "Shinjuku", "r", 32, ST10),
+station( 11, "Tokyo", "c", 35, ST11),
+station( 12, "Ginza", "r", 35, ST12),
+
+
+%creacion de todas las secciones
+section( ST1, ST2, 2,   50, S1),
+section( ST2, ST3, 2.5, 55, S2),
+section( ST3, ST4, 1.5, 30, S3),
+section( ST4, ST5, 3,   45, S4),
+
+section( ST6, ST7, 2,   25, S5),
+section( ST7, ST8, 1.3, 50, S6),
+
+section( ST9, ST10, 1.8, 35, S7),
+section( ST10, ST11, 2,   50, S8),
+section( ST11, ST12, 2.5, 55, S9),
+section( ST12, ST9, 1.8, 40, S10),
+
+
+%creacion de las lineas
+line( 1, "Linea 1", "UIC 60 ASCE", [S1,S2,S3], L1),
+line( 2, "Linea 2", "UIC 60 ASCE", [], L2),
+line( 3, "Linea 3", "100 R.E.", [S7,S8,S9], L3).
+
+
+%añadir secciones a una linea
+lineAddSection(L1, S4, L4),
+lineAddSection(L2, S5, L5),
+lineAddSection(L5, S6, L6),
+lineAddSection(L3, S10, L7),
+
+%linea lineal estandar
+isLine(L4),
+lineLength(L4, LenghtLine1,DistanceLine1,CostLine1),
+lineSectionLength(L4, "Oxford Circus", "Victoria", Path1, Distance1,Cost1),
+
+
+%linea vacia rellenada manualmente
+isLine(L6),
+lineLength(L6, LenghtLine2,DistanceLine2,CostLine2),
+lineSectionLength(L6, "Nuevos Ministerios", "Sol", Path2, Distance2,Cost2),
+
+%linea circular
+isLine(L7),
+lineLength(L7, LenghtLine3,DistanceLine3,CostLine3),
+lineSectionLength(L7, "Shinjuku", "Ginza", Path3, Distance3,Cost3),
+
+
+%creacion vagones
+pcar( 0, 100, "ICE 3", "ct", PC0),
+pcar( 1, 110, "ICE 3", "tr", PC1),
+pcar( 2, 140, "ICE 3", "tr", PC2),
+pcar( 3, 80, "ICE 3", "ct", PC3),
+
+pcar( 4, 60, "R160", "tr", PC4),
+pcar( 5, 70, "R160", "ct", PC5),
+pcar( 6, 100, "R160", "ct", PC6),
+pcar( 7, 110, "R160", "tr", PC7),
+
+pcar( 8, 60, "TGV Duplex", "tr", PC8),
+pcar( 9, 60, "TGV Duplex", "ct", PC9),
+pcar( 10, 110, "TGV Duplex", "tr", PC10),
+
+%creacion trenes
+
+%tren estandar
+train( 1, "Siemens ", "AREMA 136RE", 90, [PC1, PC0, PC3, PC2], T1),
+train( 2, "Alstom ", "BS 113A ", 70, [], T2),
+train( 3, "Alstom", "UIC 60 ASCE", 100, [PC8, PC9, PC10], T3),
+isTrain(T1),
+
+%rellenar un tren vacio
+trainAddCar(T2, PC4, 0, T4),
+trainAddCar(T4, PC5, 1, T5),
+trainAddCar(T5, PC6, 2, T6),
+trainAddCar(T6, PC7, 3, T7),
+isTrain(T7),
+
+%vaciar un tren
+trainRemoveCar(T3, 2, T8),
+trainRemoveCar(T8, 1, T9),
+trainRemoveCar(T9, 0, T10),
+isTrain(T10),
+
+
+%verificar capacidad de cada tren
+trainCapacity(T1, Capacity1),
+trainCapacity(T7, Capacity2),
+trainCapacity(T10, Capacity3),
+
+%creacion de conductores
+driver( 0, "Mauricio Saez", "Alstom", D0),
+driver( 1, "Omar Olea", "Alstom", D1),
+driver( 2, "Bastian Rivera", "Siemens", D2),
+
+%creacion de 3 redes de metro
+subway( 0, "Metro Londres", Sw0),
+subway( 1, "Metro España", Sw1),
+subway( 2, "Metro Tokyo", Sw2),
+
+%añadir una linea a cada subway
+subwayAddLine( Sw0, [L4], Sw3),
+subwayAddLine( Sw1, [L6], Sw4),
+subwayAddLine( Sw2, [L7], Sw5),
+
+%añadir un tren a cada subway
+subwayAddTrain( Sw3, [T1], Sw6),
+subwayAddTrain( Sw4, [T7], Sw7),
+subwayAddTrain( Sw5, [T10], Sw8),
+
+%añadir un conducotr a cada subway
+subwayAddDriver( Sw6, [D0], Sw9),
+subwayAddDriver( Sw7, [D1], Sw10),
+subwayAddDriver( Sw8, [D2], Sw11).

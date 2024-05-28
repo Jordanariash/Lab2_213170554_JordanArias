@@ -1,0 +1,19 @@
+Un posible error que puede dar el script de prueba, es que excede el limite de caracteres
+cerrando la consola inminentemente.
+Para esto se recomienda hacer las pruebas de los TDA de forma seccionada, osea, utilizar solo desde
+station( 1, "Kings Cross St Pancras","t", 30,ST1)  
+hasta 
+lineSectionLength(L7,"Shinjuku", "Ginza", Path3, Distance3,Cost3)
+
+y de la misma forma con los trenes, desde
+pcar( 0, 100, "ICE 3", "ct", PC0)
+hasta
+trainCapacity(T10, Capacity3)
+
+y con los conductores desde 
+driver( 0, "Mauricio Saez", "Alstom", D0)
+hasta
+driver( 2, "Bastian Rivera", "Siemens", D2)
+
+y finalmente para testear subway, lo recomendado es solo crear lo que se le vaya a añadir al subway, osea solo
+su linea, tren, y conductor correspondiente.
